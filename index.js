@@ -14,6 +14,8 @@ function init() {
   loadMainPrompts();
 }
 
+
+
 async function loadMainPrompts() {
   const { choice } = await prompt([
     {
