@@ -12,14 +12,14 @@ class DB {
       // CREATE SELECT STATMENT WITH THE FOLLOWING COLUMNS FROM THREE TABLES.
       // id, first_name, last_name FROM employee TABLE AND department name from department TABLE AND SELECT salary FROM role TABLE
       // YOUR NEED TO USE LEFT JOINS TO JOIN THREE TABLES
-      // YOUR CODE HERE
+      `SELECT employee.first_name, employee.last_name, employee.id, department.name AS department, role.title, role.salary FROM employee LEFT JOIN role on employee.role_id LEFT JOIN department on role.department_id = department.id`
     );
   }
 
   // Find all employees except the given employee id
   findAllPossibleManagers(employeeId) {
     return this.connection.query(
-      "SELECT id, first_name, last_name FROM employee WHERE id != ?",
+      `SELECT id, first_name, last_name FROM employee WHERE id != ?`,
       employeeId
     );
   }
@@ -33,7 +33,8 @@ class DB {
   // Update the given employee's role
   updateEmployeeRole(employeeId, roleId) {
     return this.connection.query(
-      // YOUR CODE HERE
+      `UPDATE employee SET role_id = ? WHERE id = ?`
+      [roleId, employeeId]
     );
   }
 
@@ -51,14 +52,14 @@ class DB {
       // SELECT THE FOLLOWING COLUMNS:
       // id, title, salary FROM role TABLE AND department name FROM department TABLE
       // YOU NEED TO USE LEFT JOIN TO JOIN role and department TABLES
-      // YOUR CODE HERE
+      `SELECT role.id, role.title, role.salary, department.name AS department FROM role LEFT JOIN department on role.department_id = department.id;`
     );
   }
 
   // Create a new role
   createRole(role) {
     return this.connection.query(
-      // YOUR CODE HERE
+      `INSERT INTO role SET ?`, role
       );
   }
 
@@ -73,7 +74,7 @@ class DB {
   // Create a new department
   createDepartment(department) {
     return this.connection.query(
-      // YOUR CODE HERE
+      `INSERT INTO department set ?`, department
     );
   }
 
